@@ -28,6 +28,7 @@ public class LFU_CACHE implements CACHE {
 	public void add(int value) {
 		if (count != capacity) {
 			cache.put(value, new Node(value));
+			count++;
 		} else {
 			cache.remove(getLFU());
 			cache.put(value, new Node(value));

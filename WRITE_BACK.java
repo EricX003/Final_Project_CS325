@@ -30,4 +30,9 @@ public class WRITE_BACK implements WRITER {
 			cache_writes++;
 		}
 	}
+	
+	public void display() {
+		System.out.println("Database Writes: " + database_writes);
+		System.out.println("Cache Writes: " + cache_writes);
+	}
 }

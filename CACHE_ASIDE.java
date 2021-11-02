@@ -1,7 +1,6 @@
 import java.util.HashSet;
 
-public class READ_THROUGH implements READER {
-	
+public class CACHE_ASIDE implements READER {
 	HashSet<Integer> database;
 	CACHE cache;
 	double hits;
@@ -10,7 +9,7 @@ public class READ_THROUGH implements READER {
 	int cache_reads;
 	int cache_writes;
 	
-	public READ_THROUGH(CACHE cache) {
+	public CACHE_ASIDE(CACHE cache) {
 		this.cache = cache;
 		cache_writes = database_reads = 0;
 		hits = misses = 0.00;
@@ -21,6 +20,7 @@ public class READ_THROUGH implements READER {
 			hits++;
 		} else {
 			misses++;
+			
 			database_reads++;
 			cache_writes++;
 			cache.add(value);
@@ -30,7 +30,7 @@ public class READ_THROUGH implements READER {
 	
 	public void display() {
 		System.out.println("Hit Rate: " + (hits / (hits + misses)));
-		System.out.println("Cache Writes: " + cache_writes);
+		System.out.println("Cache_Writes: " + cache_writes);
 		System.out.println("Database Reads: " + database_reads);
 		System.out.println("Cache Reads: " + cache_reads);
 	}

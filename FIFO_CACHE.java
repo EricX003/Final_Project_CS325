@@ -1,4 +1,3 @@
-
 import java.util.HashMap;
 import java.util.LinkedList;
 
@@ -16,31 +15,36 @@ public class FIFO_CACHE implements CACHE {
 	}
 
 	public void add(int value) {
-		if(count == capacity) {
-			count--;
-			cache.removeLast();
+		if (get(value) != value) {
+			if (count == capacity) {
+				count--;
+				int removed = cache.removeLast();
+				int frequency = (int) elements.remove(removed) - 1;
+				if (frequency != 0) {
+					elements.put(removed, frequency);
+				}
+			}
+			cache.addFirst(value);
+			if (elements.containsKey(value)) {
+				int frequency = elements.remove(value) + 1;
+				elements.put(value, frequency);
+
+			} else {
+				elements.put(value, 1);
+			}
+			count++;
 		}
-		cache.addFirst(value);
-		if(elements.containsKey(value)) {
-			int frequency = elements.remove(value) + 1;
-			elements.put(value, frequency);
-			
-		} else {
-			elements.put(value, 1);
-		}
-		count++;
 	}
 	
 	public int get(int value) {
 		if(elements.containsKey(value)) {
-			int frequency = elements.remove(value) - 1;
-			if(frequency != 0) {
-				elements.put(value, frequency);
-			}
-			
 			return value;
 		}
 		return -1;
+	}
+	
+	public void diplay() {
+		
 	}
 	
 	

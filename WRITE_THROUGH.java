@@ -19,5 +19,10 @@ public class WRITE_THROUGH implements WRITER {
 		database.add(value);
 		database_writes++;
 	}
+	
+	public void display() {
+		System.out.print("Database Writes: " + database_writes);
+		System.out.print("Cache Writes: " + cache_writes);
+	}
 		
 }
