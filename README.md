@@ -1,2 +1,5 @@
 # Final_Project_CS325
 Final Project for CS325 -- 2021 Fall
+
+Abstract:
+One of the most fundamental aspects of modern computing systems is the ability to read and write data from a source of memory. Modern computing systems maximize efficiency by optimizing this process with caching. In this work, we analyze the efficiency of various caching strategies and cache replacement policies under different kinds of generated data. Caches were represented in Java via various data structures, including the LinkedHashMap, LinkedList, and Array. These caches were then tested with various caching strategies through reading and writing random integer data. This data was then varied to simulate various applications of caching. Results from this experiment indicate that each caching replacement policy performed the best under a certain type of data and that no replacement policy was strictly superior to another in all testing scenarios. Similarly, no caching strategy was strictly superior, with each strategy having different efficiencies, reliabilities, and latencies. 
