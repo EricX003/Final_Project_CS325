@@ -3,7 +3,7 @@ import java.util.LinkedHashSet;
 
 public class WRITE_BACK implements WRITER {
 	
-	HashSet<Integer> database;
+	HashSet<Integer> database = new HashSet<Integer>();
 	CACHE cache;
 	int database_writes;
 	int cache_writes;

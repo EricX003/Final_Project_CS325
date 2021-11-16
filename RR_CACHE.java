@@ -9,32 +9,29 @@ public class RR_CACHE implements CACHE {
 		this.size = 0;
 	}
 
-	public void add(int value) {
-		
-		int[] newCache = new int[capacity];
-		
-		if (size == capacity) {
-			int removed = (int) Math.random() * size;
-			while (removed < capacity - 1) {
-				cache[removed] = cache[++removed];
-			}
-		}
-		
-		int index = 0;
-		while(cache[index] <= value && index < capacity - 1) {
-			newCache[index] = cache[index];
-			index++;
-		}
-		
-		newCache[index++] = value;
-		
-		while(index < capacity) {
-			newCache[index] = cache[index - 1];
-			index++;
-		}
-		
-		cache = newCache;
+	public void removeRandom() {
+		int index = (int) (Math.random() * size);
 
+		for (int i = index; i < capacity - 1; i++) {
+			cache[i] = cache[i + 1];
+		}
+	}
+
+	public void add(int value) {
+
+		if (size == capacity) {
+			removeRandom();
+			size--;
+		}
+		
+		int i = size - 1;
+
+		while ((i > -1) && (cache[i] > value)) {
+			cache[i + 1] = cache[i--];
+		}
+		cache[i + 1] = value;
+
+		size++;
 	}
 
 	public int get(int value) {
@@ -43,7 +40,7 @@ public class RR_CACHE implements CACHE {
 		while (left <= right) {
 			int mid = left + (right - left) / 2;
 			if (cache[mid] == value) {
-				return mid;
+				return value;
 			}
 			if (cache[mid] < value) {
 				left = mid + 1;

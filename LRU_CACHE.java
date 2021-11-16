@@ -2,6 +2,13 @@
 import java.util.HashMap;
 import java.util.Map;
 
+/*
+ * Implementation by Eric Xing
+ * LRU cache data strucutre with LinkedHashMap and Doubly-Linked list
+ * Implements the CACHE interface
+ * O(1) add, O(1) query
+ */
+
 public class LRU_CACHE implements CACHE{
 
 	static class Node {
@@ -85,8 +92,8 @@ public class LRU_CACHE implements CACHE{
 			cache.put(value, newNode);
 
 			if (size == capacity) {
-				Node tail = pop();
-				cache.remove(tail.value);
+				Node last = pop();
+				cache.remove(last.value);
 				size--;
 			}
 

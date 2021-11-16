@@ -2,6 +2,14 @@
 import java.util.HashMap;
 import java.util.Map;
 
+/*
+ * Implementation by Eric Xing
+ * MRU cache data strucutre with LinkedHashMap and Doubly-Linked list
+ * Implements the CACHE interface
+ * O(1) add, O(1) query
+ */
+
+
 public class MRU_CACHE implements CACHE {
 
 	static class Node {
@@ -15,15 +23,18 @@ public class MRU_CACHE implements CACHE {
 			this.value = value;
 		}
 
-		public Node() {
-		}
+		public Node() {}
 
 	}
 
 	int count;
 	int capacity;
+	
+	// LinkedList
 	Node head;
 	Node tail;
+	
+	// HashMap for storing cache
 	Map<Integer, Node> cache = new HashMap<>();
 
 	public MRU_CACHE(int capacity) {
@@ -41,6 +52,8 @@ public class MRU_CACHE implements CACHE {
 		tail.prev = head;
 	}
 
+	
+	// appends a new node at the tail of the LinkedList
 	void add_at_tail(Node node) {
 
 		node.next = tail;
@@ -49,6 +62,11 @@ public class MRU_CACHE implements CACHE {
 		tail.prev.next = node;
 		tail.prev = node;
 	}
+	
+	/*
+	 * removes a specific node by redirecting connections
+	 * of the subsequent and previous nodes
+	 */
 
 	void remove(Node node) {
 		Node pre = node.prev;
@@ -57,13 +75,17 @@ public class MRU_CACHE implements CACHE {
 		pre.next = next;
 		next.prev = pre;
 	}
-
+	
+	
+	// removes and returns the last node
 	Node pop() {
 		Node res = tail.prev;
 		remove(res);
 		return res;
 	}
-
+	
+	
+	// finds 
 	public int get(int key) {
 
 		if(cache.containsKey(key)) {

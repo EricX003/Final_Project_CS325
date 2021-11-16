@@ -2,7 +2,7 @@ import java.util.HashSet;
 
 public class WRITE_THROUGH implements WRITER {
 	
-	HashSet<Integer> database;
+	HashSet<Integer> database = new HashSet<Integer>();
 	CACHE cache;
 	int database_writes;
 	int cache_writes;
@@ -21,8 +21,8 @@ public class WRITE_THROUGH implements WRITER {
 	}
 	
 	public void display() {
-		System.out.print("Database Writes: " + database_writes);
-		System.out.print("Cache Writes: " + cache_writes);
+		System.out.println("Database Writes: " + database_writes);
+		System.out.println("Cache Writes: " + cache_writes);
 	}
 		
 }

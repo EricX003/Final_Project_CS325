@@ -1,52 +1,44 @@
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
+
+/*
+ * Implementation by Eric Xing
+ * FIFO cache data structure with Java LinkedList implementation
+ * Implements the CACHE interface
+ * O(1) add, O(1) query
+ */
 
 public class FIFO_CACHE implements CACHE {
 
-	LinkedList<Integer> cache = new LinkedList<Integer>();
-	HashMap<Integer, Integer> elements = new HashMap<Integer, Integer>();
-	
+	LinkedList<Integer> cache = new LinkedList<Integer>(); // LinkedList implementation of Queue
+	HashSet<Integer> elements = new HashSet<Integer>(); // Storing the elements
+
 	int count;
 	int capacity;
 
-	public FIFO_CACHE(int capacity) {
+	public FIFO_CACHE(int capacity) { // constructor
 		this.capacity = capacity;
 		this.count = 0;
 	}
 
 	public void add(int value) {
-		if (get(value) != value) {
-			if (count == capacity) {
-				count--;
-				int removed = cache.removeLast();
-				int frequency = (int) elements.remove(removed) - 1;
-				if (frequency != 0) {
-					elements.put(removed, frequency);
-				}
-			}
-			cache.addFirst(value);
-			if (elements.containsKey(value)) {
-				int frequency = elements.remove(value) + 1;
-				elements.put(value, frequency);
-
-			} else {
-				elements.put(value, 1);
-			}
-			count++;
-		}
-	}
-	
-	public int get(int value) {
-		if(elements.containsKey(value)) {
-			return value;
-		}
-		return -1;
-	}
-	
-	public void diplay() {
 		
+		if (count == capacity) { // if the cache is full
+			count--; // count == capacity after insertion
+			Integer removed = cache.removeLast(); // satisfies the property of FIFO data structure (queue)
+			elements.remove(removed); // remove from set
+		}
+		elements.add(value);
+		cache.addFirst(value); // insert into beginning, remove at end
+		count++; // update count 
 	}
-	
-	
+
+	public int get(int value) {
+		if (elements.contains(value)) { // use HashSet O(1) lookup
+			return value; // found
+		}
+		return -1; // not found
+	}
+
 
 }
